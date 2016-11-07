@@ -16,20 +16,16 @@ class NegociacaoController {
 
     adiciona(event) {
         event.preventDefault();
-                
-        // As três formas abaixo funcionam
-        // let data = new Date(this._inputData.value.split('-')); // Passa um array de strings
-        // let data = new Date(this._inputData.value.replace(/-/g, ',')); // Passa uma string na forma 'YYYY-MM-DD' 
-        let data = new Date(...this._inputData.value // ... indica 'spread operator', que faz com que os itens do array se tornem parâmetros separados da função que está sendo chamada
-            .split('-')
-            .map((item, indice) => item - indice % 2)
-        ); 
+
+        let helper = new DateHelper();
         
         let negociacao = new Negociacao(
-            data,
+            helper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value
         );
+
+        console.log(negociacao);
 
         this.limpaForm();
     }
