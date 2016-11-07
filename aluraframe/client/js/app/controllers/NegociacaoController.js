@@ -20,17 +20,25 @@ class NegociacaoController {
         // As três formas abaixo funcionam
         // let data = new Date(this._inputData.value.split('-')); // Passa um array de strings
         // let data = new Date(this._inputData.value.replace(/-/g, ',')); // Passa uma string na forma 'YYYY-MM-DD' 
-        let data = new Date(...this._inputData.value // ... indica 'spread operator'
+        let data = new Date(...this._inputData.value // ... indica 'spread operator', que faz com que os itens do array se tornem parâmetros separados da função que está sendo chamada
             .split('-')
-            .map(function(item, indice) {
-                return item - indice % 2;
-            })
+            .map((item, indice) => item - indice % 2)
         ); 
         
         let negociacao = new Negociacao(
-            this._inputData.value,
+            data,
             this._inputQuantidade.value,
             this._inputValor.value
         );
+
+        this.limpaForm();
+    }
+
+    limpaForm() {
+        this._inputData.value = '';
+        this._inputQuantidade.value = 1;
+        this._inputValor.value = 0;
+
+        this._inputData.focus();
     }
 }
