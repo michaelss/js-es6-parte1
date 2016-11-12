@@ -2,7 +2,7 @@ class NegociacaoController {
 
     constructor() {
         /**
-         * Não funciona, pois, ao ser jogado para uma variável, o método querySelector seria jogado como função
+         * A linha comentada não funciona, pois, ao ser jogado para uma variável, o método querySelector seria jogado como função
          * e, nesse caso, o this dessa função não seria do document, mas do presente script. Para solucionar, é
          * necessário fazer o bind com document, na linha seguinte.
          */
@@ -13,12 +13,16 @@ class NegociacaoController {
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
         this._listaNegociacoes = new ListaNegociacoes();
+
+        this._negociacoesView = new NegociacoesView($('#negociacoesView'));
+        this._negociacoesView.update(this._listaNegociacoes);
     }
 
     adiciona(event) {
         event.preventDefault();
 
         this._listaNegociacoes.adiciona(this._criaNegociacao());
+        this._negociacoesView.update(this._listaNegociacoes);
         this._limpaFormulario();
     }
 
