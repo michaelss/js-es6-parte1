@@ -1,10 +1,11 @@
-class NegociacoesView {
+class NegociacoesView extends View {
 
+    // O construtor é herdado automaticamente, então ele não é obrigatório abaixo.
     constructor(elemento) {
-        this._elemento = elemento;
+        super(elemento);
     }
 
-    _template(model) {
+    template(model) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -39,7 +40,4 @@ class NegociacoesView {
         `;
     }
 
-    update(model) {
-        this._elemento.innerHTML = this._template(model);
-    }
 }
